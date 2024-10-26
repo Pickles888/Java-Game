@@ -14,7 +14,10 @@ public class Update {
 
 	public Update(GameState game) {
 		this.gameOriginal = game;
+
 		// make a new updated game
+
+		this.gameUpdated = null;
 	}
 
 	public GameState getUpdated() {

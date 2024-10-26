@@ -1,6 +1,4 @@
-package org.programmingGame.gameObject.entity;
-
-import org.programmingGame.Coordinate;
+package org.programmingGame.utils;
 
 public class Vector2d {
 	public final int x;
@@ -18,5 +16,9 @@ public class Vector2d {
 	public int length() {
 		return ((int) Math.floor(Math.sqrt(
 				Math.pow(this.x, 2) + Math.pow(this.y, 2))));
+	}
+
+	public Coordinate moveCoordinate(Coordinate a) {
+		return new Coordinate(this.x + a.x, this.y + a.y);
 	}
 }

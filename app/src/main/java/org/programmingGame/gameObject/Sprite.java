@@ -1,4 +1,4 @@
-package org.programmingGame;
+package org.programmingGame.gameObject;
 
 public class Sprite {
 	public enum Level {

@@ -3,7 +3,6 @@ package org.programmingGame;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Stream;
 
 import org.programmingGame.errors.GameError;
 
@@ -18,7 +17,7 @@ public class Game {
 	public GameState gameLoop(List<GameState> game) {
 		GameState currentGame = game.getLast(); // gets the currently displayed game
 		Update gameUpdate = new Update(currentGame); // updates the current game to a new one
-		boolean panicked = !gameUpdate.errors.isEmpty(); // checks if there are any panics
+		boolean panicked = !gameUpdate.panics.isEmpty(); // checks if there are any panics
 
 		if (currentGame.isRunning && !panicked) {
 			game.add(gameUpdate.getUpdated());

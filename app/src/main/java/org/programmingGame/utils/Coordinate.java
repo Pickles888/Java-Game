@@ -1,4 +1,4 @@
-package org.programmingGame;
+package org.programmingGame.utils;
 
 public class Coordinate {
 	public final int x;
