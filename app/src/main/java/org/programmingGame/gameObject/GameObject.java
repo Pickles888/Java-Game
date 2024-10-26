@@ -1,15 +1,29 @@
 package org.programmingGame.gameObject;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 import org.programmingGame.utils.Coordinate;
 
-public class GameObject {
-	protected final Optional<Sprite> sprite;
+public abstract class GameObject {
+	protected final Optional<List<Sprite>> sprite; // multiple sprites will be chosen at random
 	protected final Coordinate coord;
 
-	public GameObject(Sprite sprite, int x, int y) {
-		this.sprite = Optional.of(sprite);
+	public GameObject(Sprite[] sprite, double x, double y) {
+		this.sprite = Optional.of(Arrays.asList(sprite));
 		this.coord = new Coordinate(x, y);
 	}
+
+	public GameObject(Sprite sprite, double x, double y) {
+		this.sprite = Optional.of(List.of(sprite));
+		this.coord = new Coordinate(x, y);
+	}
+
+	public GameObject(double x, double y) {
+		this.sprite = Optional.empty();
+		this.coord = new Coordinate(x, y);
+	}
+
+	public abstract GameObject update();
 }

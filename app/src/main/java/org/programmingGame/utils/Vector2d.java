@@ -1,10 +1,10 @@
 package org.programmingGame.utils;
 
 public class Vector2d {
-	public final int x;
-	public final int y;
+	public final double x;
+	public final double y;
 
-	public Vector2d(int x, int y) {
+	public Vector2d(double x, double y) {
 		this.x = x;
 		this.y = y;
 	}

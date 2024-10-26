@@ -4,16 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import org.programmingGame.Sprite;
 import org.programmingGame.gameObject.GameObject;
+import org.programmingGame.gameObject.Sprite;
 import org.programmingGame.utils.Coordinate;
 import org.programmingGame.utils.Vector2d;
 
-public class Entity extends GameObject {
-	private final List<Vector2d> movementHistory = new ArrayList<>();
+public abstract class Entity extends GameObject {
 	private Optional<Vector2d> nextMovement = Optional.empty();
 
-	public Entity(Sprite sprite, int x, int y) {
+	public Entity(Sprite sprite, double x, double y) {
 		super(sprite, x, y);
 	}
 

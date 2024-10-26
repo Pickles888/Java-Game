@@ -1,16 +1,32 @@
 package org.programmingGame;
 
+import java.awt.Canvas;
+import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import org.programmingGame.errors.GameError;
+import javax.swing.JFrame;
 
-public class Game {
+import org.programmingGame.error.GameError;
+import org.programmingGame.error.errors.InterruptedError;
+
+public class Game extends Canvas implements Runnable {
+	private static final int WIDTH = 640;
+	private static final int HEIGHT = 360;
+
 	public final List<GameError> gameErrors = new ArrayList<>();
 	public final GameState startingState;
 
 	public Game(GameState startingState) {
+		JFrame frame = new JFrame("2D Game");
+		this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
+		frame.add(this);
+		frame.pack();
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setLocationRelativeTo(null);
+		frame.setVisible(true);
+
 		this.startingState = startingState;
 	}
 
@@ -19,8 +35,18 @@ public class Game {
 		Update gameUpdate = new Update(currentGame); // updates the current game to a new one
 		boolean panicked = !gameUpdate.panics.isEmpty(); // checks if there are any panics
 
+		gameErrors.addAll(gameUpdate.errors);
+		gameErrors.addAll(gameUpdate.panics);
+
 		if (currentGame.isRunning && !panicked) {
 			game.add(gameUpdate.getUpdated());
+
+			try {
+				Thread.sleep(16);
+			} catch (InterruptedException e) {
+				gameErrors.add(new InterruptedError(e));
+			}
+
 			return gameLoop(game);
 		} else if (panicked) {
 			System.err.println("Game Panicked!");
@@ -33,22 +59,8 @@ public class Game {
 	public void run() {
 		System.out.println("--- Running Game ---");
 
-		List<GameState> gameStates = new ArrayList<>();
-
 		boolean restarting = false;
 
-		while (restarting) {
-			GameState gameResult = gameLoop(Arrays.asList(this.startingState));
-
-			gameStates.add(gameResult);
-
-			// check if you are restarting
-		}
-
-		List<GameError> errors = new ArrayList<>();
-
-		gameStates.stream().map(a -> a.errors).toList().forEach(errors::addAll); // concentrate errors
-
-		gameErrors.addAll(errors);
+		GameState gameResult = gameLoop(Arrays.asList(this.startingState));
 	}
 }

@@ -3,8 +3,8 @@ package org.programmingGame;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.programmingGame.errors.GameError;
-import org.programmingGame.errors.panics.GamePanic;
+import org.programmingGame.error.GameError;
+import org.programmingGame.error.panic.GamePanic;
 
 public class Update {
 	public final List<GamePanic> panics = new ArrayList<>();

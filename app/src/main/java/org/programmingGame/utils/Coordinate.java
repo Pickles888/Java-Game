@@ -1,10 +1,10 @@
 package org.programmingGame.utils;
 
 public class Coordinate {
-	public final int x;
-	public final int y;
+	public final double x;
+	public final double y;
 
-	public Coordinate(int x, int y) {
+	public Coordinate(double x, double y) {
 		this.x = x;
 		this.y = y;
 	}

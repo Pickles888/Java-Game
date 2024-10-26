@@ -3,7 +3,7 @@ package org.programmingGame;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.programmingGame.errors.GameError;
+import org.programmingGame.error.GameError;
 
 public class GameState {
 	public final boolean isRunning;
