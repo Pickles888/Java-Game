@@ -2,6 +2,7 @@ package org.programmingGame;
 
 import java.awt.Canvas;
 import java.awt.Dimension;
+import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -40,13 +41,13 @@ public class Game extends Canvas implements Runnable {
 
 		if (currentGame.isRunning && !panicked) {
 			game.add(gameUpdate.getUpdated());
-
 			try {
 				Thread.sleep(16);
 			} catch (InterruptedException e) {
 				gameErrors.add(new InterruptedError(e));
 			}
 
+			repaint();
 			return gameLoop(game);
 		} else if (panicked) {
 			System.err.println("Game Panicked!");
@@ -62,5 +63,11 @@ public class Game extends Canvas implements Runnable {
 		boolean restarting = false;
 
 		GameState gameResult = gameLoop(Arrays.asList(this.startingState));
+	}
+
+	@Override
+	public void paint(Graphics g) {
+		super.paint(g);
+		// draw sprites and stuff :/
 	}
 }

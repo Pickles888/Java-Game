@@ -1,7 +1,5 @@
 package org.programmingGame;
 
-import java.util.ArrayList;
-
 public class Main {
 	public static GameState startingGame() {
 		return null;
