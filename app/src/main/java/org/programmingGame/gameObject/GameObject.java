@@ -6,7 +6,7 @@ import java.util.Optional;
 
 import org.programmingGame.utils.Coordinate;
 
-public abstract class GameObject {
+public abstract class GameObject implements Update {
 	protected final Optional<List<Sprite>> sprite; // multiple sprites will be chosen at random
 	protected final Coordinate coord;
 
@@ -24,6 +24,4 @@ public abstract class GameObject {
 		this.sprite = Optional.empty();
 		this.coord = new Coordinate(x, y);
 	}
-
-	public abstract GameObject update();
 }
