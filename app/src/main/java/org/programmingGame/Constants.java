@@ -2,10 +2,13 @@ package org.programmingGame;
 
 import java.awt.event.KeyEvent;
 
+import org.programmingGame.gameObject.Sprite;
+import org.programmingGame.gameObject.Sprite.Level;
+
 public class Constants {
 	public static final class Sprites {
 		public static final String unknownPath = ""; // UPDATE PATHS
-		public static final String playerPath = "";
+		public static final Sprite player = Sprite.makeSprite("", Level.MIDGROUND);
 	}
 
 	public static final class Input {

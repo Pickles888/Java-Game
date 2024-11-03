@@ -14,15 +14,17 @@ import javax.swing.JFrame;
 import org.programmingGame.error.GameError;
 import org.programmingGame.error.errors.InterruptedError;
 import org.programmingGame.error.panic.GamePanic;
+import org.programmingGame.utils.Utils;
 
 public class Game extends Canvas implements Runnable, KeyListener {
 	private static final int WIDTH = 640;
 	private static final int HEIGHT = 360;
 
 	public final List<GameError> gameErrors = new ArrayList<>();
-	public final GameState startingState;
 
-	public final Keyboard keyboard;
+	private GameState currentState;
+
+	public final Keyboard keyboard = new Keyboard();
 
 	public Game(GameState startingState) {
 		JFrame frame = new JFrame("2D Game");
@@ -33,48 +35,52 @@ public class Game extends Canvas implements Runnable, KeyListener {
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 
-		keyboard = new Keyboard();
-
-		this.startingState = startingState;
+		this.currentState = startingState;
+		repaint();
 	}
 
 	public GameState gameLoop(List<GameState> game) {
-		GameState currentGame = game.getLast(); // gets the currently displayed game
-		GameState gameUpdated = currentGame.update(); // updates the current game to a new one
-		boolean panicked = !gameUpdated.errors.stream().filter(a -> a instanceof GamePanic).isEmpty(); // checks if there are any panics
+		GameState currentState = game.getLast(); // gets the currently displayed game
+		GameState gameUpdated = currentState.getUpdated(this); // updates the current game to a new one
+		boolean panicked = gameUpdated.errors
+				.stream()
+				.anyMatch(a -> a instanceof GamePanic);
 
 		gameErrors.addAll(gameUpdated.errors);
 
-		if (currentGame.isRunning && !panicked) {
-			game.add(gameUpdated.getUpdated());
+		if (currentState.isRunning && !panicked) {
+			game.add(gameUpdated);
+
 			try {
 				Thread.sleep(16);
 			} catch (InterruptedException e) {
-				gameErrors.add(new InterruptedError(e));
-			d}
+				e.printStackTrace(); // not adding it to errors, not multithreaded so should never happen
+			}
 
+			this.currentState = currentState;
 			repaint();
-			return gameLoop(game);
+
+			return gameLoop(Utils.truncateList(game, 20));
 		} else if (panicked) {
 			System.err.println("Game Panicked!");
-			return currentGame;
+			return currentState;
 		} else {
-			return currentGame;
+			return currentState;
 		}
 	}
 
 	public void run() {
 		System.out.println("--- Running Game ---");
 
-		boolean restarting = false;
+		GameState gameResult = gameLoop(Arrays.asList(this.currentState));
 
-		GameState gameResult = gameLoop(Arrays.asList(this.startingState));
+		gameResult.errors.stream().forEach(a -> System.out.println(a.show()));
 	}
 
 	@Override
 	public void paint(Graphics g) {
 		super.paint(g);
-		// draw sprites and stuff :/
+		// draw sprites and stuff based on the current game state :/
 	}
 
 	@Override

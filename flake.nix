@@ -1,5 +1,5 @@
 {
-  description = "A game that I made for my programming class, in java :(";
+  description = "A game that I made for my programming class; in java :(";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
