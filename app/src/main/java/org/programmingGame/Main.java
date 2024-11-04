@@ -2,7 +2,7 @@ package org.programmingGame;
 
 public class Main {
 	public static GameState startingGame() {
-		return null;
+		return new GameState();
 	}
 
 	public static void main(String[] args) {

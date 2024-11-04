@@ -53,7 +53,7 @@ public class Game extends Canvas implements Runnable, KeyListener {
 			try {
 				Thread.sleep(16);
 			} catch (InterruptedException e) {
-				e.printStackTrace(); // not adding it to errors, not multithreaded so should never happen
+				e.printStackTrace(); // not adding it to errors, not multithreaded so should never happen i think
 			}
 
 			this.currentState = currentState;
@@ -76,10 +76,15 @@ public class Game extends Canvas implements Runnable, KeyListener {
 		gameResult.errors.stream().forEach(a -> System.out.println(a.show()));
 	}
 
+	public GameState getCurrentState() {
+		return currentState;
+	}
+
 	@Override
 	public void paint(Graphics g) {
 		super.paint(g);
-		// draw sprites and stuff based on the current game state :/
+
+		currentState.gameObjects.stream().forEach(a -> a.paint(g));
 	}
 
 	@Override

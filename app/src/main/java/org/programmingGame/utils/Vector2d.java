@@ -27,4 +27,9 @@ public class Vector2d {
 	public Vector2d add(Vector2d a) {
 		return new Vector2d(this.x + a.x, this.y + a.y);
 	}
+
+	// get dot product of two vectors
+	public Vector2d dot(Vector2d a) {
+		return new Vector2d(this.x * a.x, this.y * a.y);
+	}
 }

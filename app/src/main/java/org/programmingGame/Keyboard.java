@@ -11,7 +11,6 @@ public class Keyboard {
 		MOVERIGHT,
 		MOVEUP,
 		MOVEDOWN,
-		ATTACK,
 	}
 
 	private boolean[] keys = new boolean[256];
