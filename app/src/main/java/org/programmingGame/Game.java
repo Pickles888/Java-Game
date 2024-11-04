@@ -8,11 +8,14 @@ import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Stream;
 
 import javax.swing.JFrame;
 
 import org.programmingGame.error.GameError;
 import org.programmingGame.error.panic.GamePanic;
+import org.programmingGame.gameObject.GameObject;
+import org.programmingGame.gameObject.Sprite.Level;
 import org.programmingGame.utils.Utils;
 
 public class Game extends Canvas implements Runnable, KeyListener {
@@ -53,6 +56,7 @@ public class Game extends Canvas implements Runnable, KeyListener {
 			try {
 				Thread.sleep(16);
 			} catch (InterruptedException e) {
+				System.err.println("Interrupted!!");
 				e.printStackTrace(); // not adding it to errors, not multithreaded so should never happen i think
 			}
 
@@ -84,7 +88,11 @@ public class Game extends Canvas implements Runnable, KeyListener {
 	public void paint(Graphics g) {
 		super.paint(g);
 
-		currentState.gameObjects.stream().forEach(a -> a.paint(g));
+		Stream<GameObject> objStream = currentState.gameObjects.stream();
+
+		objStream.filter(a -> a.getLevel() == Level.BACKGROUND).forEach(a -> a.paint(g));
+		objStream.filter(a -> a.getLevel() == Level.MIDGROUND).forEach(a -> a.paint(g));
+		objStream.filter(a -> a.getLevel() == Level.FOREGROUND).forEach(a -> a.paint(g));
 	}
 
 	@Override

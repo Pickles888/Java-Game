@@ -10,7 +10,8 @@ public class Constants {
 
 	public static final class Sprites {
 		private static Sprite sprite(String spritePath, Level level) {
-			return Sprite.make(spritePath, level).unwrap(ignore -> Sprite.unknown(level));
+			return Sprite.make(Constants.class.getResource("../../../../../../assets/" + spritePath), level)
+					.unwrap(ignore -> Sprite.unknown(level));
 		}
 
 		public static final String unknownPath = "";

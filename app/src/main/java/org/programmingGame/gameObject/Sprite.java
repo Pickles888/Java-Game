@@ -2,7 +2,9 @@ package org.programmingGame.gameObject;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.net.URL;
 import java.nio.file.FileSystems;
+import java.nio.file.Path;
 
 import javax.imageio.ImageIO;
 
@@ -40,8 +42,24 @@ public class Sprite {
 		return result;
 	}
 
+	private static Result<BufferedImage> makeImage(URL url) {
+		Result<BufferedImage> result;
+
+		try {
+			result = new Result<>(ImageIO.read(url));
+		} catch (IOException e) {
+			result = new Result<>(new SpriteLoadError(url.toString()));
+		}
+
+		return result;
+	}
+
 	public static Result<Sprite> make(String spritePath, Level level) {
-		return makeImage(spritePath).map(a -> new Sprite(spritePath, a, level)); // gets image and maps the result to sprite
+		return makeImage(spritePath).map(a -> new Sprite(spritePath, a, level)); // gets image
+	}
+
+	public static Result<Sprite> make(URL url, Level level) {
+		return makeImage(url).map(a -> new Sprite(url.toString(), a, level)); // gets image
 	}
 
 	public BufferedImage getImage() {
@@ -50,6 +68,7 @@ public class Sprite {
 
 	public static Sprite unknown(Level level) {
 		return Sprite.make(Sprites.unknownPath, level).unwrap(a -> {
+			System.err.println("Failed to load unknown sprite (bruh)");
 			System.exit(1);
 			return null; // unreachable code
 		});
