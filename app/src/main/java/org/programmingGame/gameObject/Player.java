@@ -7,7 +7,6 @@ import org.programmingGame.Constants;
 import org.programmingGame.Constants.Sprites;
 import org.programmingGame.Game;
 import org.programmingGame.Keyboard.GameInput;
-import org.programmingGame.gameObject.entity.Entity;
 import org.programmingGame.utils.Vector2d;
 
 public class Player extends GameObject {

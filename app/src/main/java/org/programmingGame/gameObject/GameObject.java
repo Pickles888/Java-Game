@@ -3,7 +3,6 @@ package org.programmingGame.gameObject;
 import java.awt.Graphics;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 import java.util.Random;
 
 import org.programmingGame.Update;
