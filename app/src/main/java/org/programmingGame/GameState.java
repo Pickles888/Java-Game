@@ -2,12 +2,11 @@ package org.programmingGame;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Supplier;
 
 import org.programmingGame.Keyboard.GameInput;
 import org.programmingGame.error.GameError;
 import org.programmingGame.gameObject.GameObject;
-import org.programmingGame.gameObject.entity.entities.Player;
+import org.programmingGame.gameObject.Player;
 
 public class GameState {
 	public final boolean isRunning;

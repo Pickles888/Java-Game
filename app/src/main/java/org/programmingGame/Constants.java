@@ -7,8 +7,12 @@ import org.programmingGame.gameObject.Sprite.Level;
 
 public class Constants {
 	public static final class Sprites {
-		public static final String unknownPath = ""; // UPDATE PATHS
-		public static final Sprite player = Sprite.makeSprite("", Level.MIDGROUND);
+		private static Sprite sprite(String spritePath, Level level) {
+			return Sprite.make(spritePath, level).unwrap(ignore -> Sprite.unknown(level));
+		}
+
+		public static final String unknownPath = "";
+		public static final Sprite player = sprite("", Level.MIDGROUND);
 	}
 
 	public static final class Input {

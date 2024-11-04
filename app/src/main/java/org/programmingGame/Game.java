@@ -12,7 +12,6 @@ import java.util.List;
 import javax.swing.JFrame;
 
 import org.programmingGame.error.GameError;
-import org.programmingGame.error.errors.InterruptedError;
 import org.programmingGame.error.panic.GamePanic;
 import org.programmingGame.utils.Utils;
 

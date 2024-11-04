@@ -1,20 +1,16 @@
 package org.programmingGame.gameObject;
 
 import java.util.List;
-import java.util.Optional;
 
-import org.programmingGame.Constants;
 import org.programmingGame.GameState;
+import org.programmingGame.Constants.Sprites;
 import org.programmingGame.Keyboard.GameInput;
-import org.programmingGame.gameObject.GameObject;
-import org.programmingGame.gameObject.Sprite;
-import org.programmingGame.gameObject.Sprite.Level;
-import org.programmingGame.gameObject.entity.Entity;
 import org.programmingGame.utils.Vector2d;
 
 public class Player extends GameObject {
 	public Player(double x, double y) {
-		super(Sprite.makeSprite(Constants.Sprites.playerPath, Level.MIDGROUND), x, y);
+
+		super(Sprites.player, x, y);
 	}
 
 	public GameObject update(GameState game) {

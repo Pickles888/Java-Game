@@ -7,7 +7,8 @@ import java.nio.file.FileSystems;
 import javax.imageio.ImageIO;
 
 import org.programmingGame.error.errors.SpriteLoadError;
-import org.programmingGame.error.result.Result;
+import org.programmingGame.Constants.Sprites;
+import org.programmingGame.error.Result;
 
 public class Sprite {
 	public enum Level {
@@ -39,11 +40,18 @@ public class Sprite {
 		return result;
 	}
 
-	public static Result<Sprite> makeSprite(String spritePath, Level level) {
+	public static Result<Sprite> make(String spritePath, Level level) {
 		return makeImage(spritePath).map(a -> new Sprite(spritePath, a, level)); // gets image and maps the result to sprite
 	}
 
 	public BufferedImage getImage() {
 		return image;
+	}
+
+	public static Sprite unknown(Level level) {
+		return Sprite.make(Sprites.unknownPath, level).unwrap(a -> {
+			System.exit(1);
+			return null; // unreachable code
+		});
 	}
 }
